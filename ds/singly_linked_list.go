@@ -48,6 +48,9 @@ func NewLinkedList() *LinkedList {
 }
 
 func (ll *LinkedList) Get(index int) int {
+	if index < 0 {
+		return -1
+	}
 	if ll.head == nil {
 		return -1
 	}
@@ -79,6 +82,22 @@ func (ll *LinkedList) InsertTail(val int) {
 		curr = curr.next
 	}
 	curr.next = newTail
+}
+
+func (ll *LinkedList) Insert(index int, val int) {
+	if index == 0 {
+		n := &node{val: val, next: ll.head}
+		ll.head = n
+		return
+	}
+	curr := ll.head
+	for i := 0; i < index-1 && curr != nil; i++ {
+		curr = curr.next
+	}
+	if curr == nil {
+		return
+	}
+	curr.next = &node{val: val, next: curr.next}
 }
 
 func (ll *LinkedList) Remove(index int) bool {
