@@ -38,6 +38,14 @@ func NewDeque() *Deque {
 	return &Deque{}
 }
 
+func NewDequeInts(vals []int) *Deque {
+	d := &Deque{}
+	for _, val := range vals {
+		d.Append(val)
+	}
+	return d
+}
+
 func (d *Deque) IsEmpty() bool {
 	return d.head == nil
 }
@@ -76,6 +84,16 @@ func (d *Deque) Pop() int {
 	d.tail = d.tail.prev
 	d.tail.next = nil
 	return v
+}
+
+func (d *Deque) GetArray() []int {
+	var arr []int
+	curr := d.head
+	for curr != nil {
+		arr = append(arr, curr.val)
+		curr = curr.next
+	}
+	return arr
 }
 
 func (d *Deque) PopLeft() int {
