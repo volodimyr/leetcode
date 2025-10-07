@@ -998,3 +998,544 @@ func TestInsertTail_BugCheck_HeadNotSetOnFirstInsert(t *testing.T) {
 		t.Error("head and tail should be the same node for single element")
 	}
 }
+
+func TestRemoveHead_EmptyList(t *testing.T) {
+	dll := NewDoublyLinkedList()
+
+	// Should not panic on empty list
+	dll.RemoveHead()
+
+	if dll.head != nil {
+		t.Error("head should still be nil after RemoveHead on empty list")
+	}
+	if dll.tail != nil {
+		t.Error("tail should still be nil after RemoveHead on empty list")
+	}
+}
+
+func TestRemoveHead_SingleElement(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(42)
+
+	dll.RemoveHead()
+
+	// Both head and tail should be nil after removing the only element
+	if dll.head != nil {
+		t.Error("head should be nil after removing single element")
+	}
+	if dll.tail != nil {
+		t.Error("tail should be nil after removing single element")
+	}
+
+	// Forward and Backward should return empty slices
+	if len(dll.Forward()) != 0 {
+		t.Errorf("Forward() should return empty slice, got %v", dll.Forward())
+	}
+	if len(dll.Backward()) != 0 {
+		t.Errorf("Backward() should return empty slice, got %v", dll.Backward())
+	}
+}
+
+func TestRemoveHead_TwoElements(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(10)
+	dll.InsertTail(20)
+
+	dll.RemoveHead()
+
+	// Head should now be 20
+	if dll.head == nil {
+		t.Fatal("head should not be nil")
+	}
+	if dll.head.val != 20 {
+		t.Errorf("expected head value 20, got %d", dll.head.val)
+	}
+
+	// Head's prev should be nil
+	if dll.head.prev != nil {
+		t.Error("head.prev should be nil")
+	}
+
+	// Tail should also be 20 (same node as head)
+	if dll.tail == nil {
+		t.Fatal("tail should not be nil")
+	}
+	if dll.tail != dll.head {
+		t.Error("tail should equal head when list has one element")
+	}
+
+	// Check traversal
+	if !equalSlices(dll.Forward(), []int{20}) {
+		t.Errorf("Forward() = %v, want [20]", dll.Forward())
+	}
+}
+
+func TestRemoveHead_MultipleElements(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(1)
+	dll.InsertTail(2)
+	dll.InsertTail(3)
+	dll.InsertTail(4)
+
+	dll.RemoveHead() // Remove 1
+
+	// Head should be 2
+	if dll.head.val != 2 {
+		t.Errorf("expected head value 2, got %d", dll.head.val)
+	}
+
+	// Head's prev should be nil
+	if dll.head.prev != nil {
+		t.Error("new head's prev should be nil")
+	}
+
+	// Tail should still be 4
+	if dll.tail.val != 4 {
+		t.Errorf("expected tail value 4, got %d", dll.tail.val)
+	}
+
+	// Check forward traversal
+	expected := []int{2, 3, 4}
+	if !equalSlices(dll.Forward(), expected) {
+		t.Errorf("Forward() = %v, want %v", dll.Forward(), expected)
+	}
+
+	// Check backward traversal
+	expectedBack := []int{4, 3, 2}
+	if !equalSlices(dll.Backward(), expectedBack) {
+		t.Errorf("Backward() = %v, want %v", dll.Backward(), expectedBack)
+	}
+}
+
+func TestRemoveHead_Consecutive(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(10)
+	dll.InsertTail(20)
+	dll.InsertTail(30)
+
+	dll.RemoveHead() // Remove 10
+	dll.RemoveHead() // Remove 20
+
+	// Should have only 30 left
+	if dll.head.val != 30 {
+		t.Errorf("expected head value 30, got %d", dll.head.val)
+	}
+	if dll.tail.val != 30 {
+		t.Errorf("expected tail value 30, got %d", dll.tail.val)
+	}
+	if dll.head != dll.tail {
+		t.Error("head and tail should be the same for single element")
+	}
+
+	dll.RemoveHead() // Remove 30
+
+	// Should be empty
+	if dll.head != nil || dll.tail != nil {
+		t.Error("list should be empty after removing all elements")
+	}
+}
+
+// ============================================================================
+// RemoveTail Tests
+// ============================================================================
+
+func TestRemoveTail_EmptyList(t *testing.T) {
+	dll := NewDoublyLinkedList()
+
+	// Should not panic on empty list
+	dll.RemoveTail()
+
+	if dll.head != nil {
+		t.Error("head should still be nil after RemoveTail on empty list")
+	}
+	if dll.tail != nil {
+		t.Error("tail should still be nil after RemoveTail on empty list")
+	}
+}
+
+func TestRemoveTail_SingleElement(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(42)
+
+	dll.RemoveTail()
+
+	// Both head and tail should be nil after removing the only element
+	if dll.head != nil {
+		t.Error("head should be nil after removing single element")
+	}
+	if dll.tail != nil {
+		t.Error("tail should be nil after removing single element")
+	}
+
+	// Forward and Backward should return empty slices
+	if len(dll.Forward()) != 0 {
+		t.Errorf("Forward() should return empty slice, got %v", dll.Forward())
+	}
+	if len(dll.Backward()) != 0 {
+		t.Errorf("Backward() should return empty slice, got %v", dll.Backward())
+	}
+}
+
+func TestRemoveTail_TwoElements(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(10)
+	dll.InsertTail(20)
+
+	dll.RemoveTail()
+
+	// Tail should now be 10
+	if dll.tail == nil {
+		t.Fatal("tail should not be nil")
+	}
+	if dll.tail.val != 10 {
+		t.Errorf("expected tail value 10, got %d", dll.tail.val)
+	}
+
+	// Tail's next should be nil
+	if dll.tail.next != nil {
+		t.Error("tail.next should be nil")
+	}
+
+	// Head should also be 10 (same node as tail)
+	if dll.head == nil {
+		t.Fatal("head should not be nil")
+	}
+	if dll.head != dll.tail {
+		t.Error("head should equal tail when list has one element")
+	}
+
+	// Check traversal
+	if !equalSlices(dll.Forward(), []int{10}) {
+		t.Errorf("Forward() = %v, want [10]", dll.Forward())
+	}
+}
+
+func TestRemoveTail_MultipleElements(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(1)
+	dll.InsertTail(2)
+	dll.InsertTail(3)
+	dll.InsertTail(4)
+
+	dll.RemoveTail() // Remove 4
+
+	// Tail should be 3
+	if dll.tail.val != 3 {
+		t.Errorf("expected tail value 3, got %d", dll.tail.val)
+	}
+
+	// Tail's next should be nil
+	if dll.tail.next != nil {
+		t.Error("new tail's next should be nil")
+	}
+
+	// Head should still be 1
+	if dll.head.val != 1 {
+		t.Errorf("expected head value 1, got %d", dll.head.val)
+	}
+
+	// Check forward traversal
+	expected := []int{1, 2, 3}
+	if !equalSlices(dll.Forward(), expected) {
+		t.Errorf("Forward() = %v, want %v", dll.Forward(), expected)
+	}
+
+	// Check backward traversal
+	expectedBack := []int{3, 2, 1}
+	if !equalSlices(dll.Backward(), expectedBack) {
+		t.Errorf("Backward() = %v, want %v", dll.Backward(), expectedBack)
+	}
+}
+
+func TestRemoveTail_Consecutive(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(10)
+	dll.InsertTail(20)
+	dll.InsertTail(30)
+
+	dll.RemoveTail() // Remove 30
+	dll.RemoveTail() // Remove 20
+
+	// Should have only 10 left
+	if dll.head.val != 10 {
+		t.Errorf("expected head value 10, got %d", dll.head.val)
+	}
+	if dll.tail.val != 10 {
+		t.Errorf("expected tail value 10, got %d", dll.tail.val)
+	}
+	if dll.head != dll.tail {
+		t.Error("head and tail should be the same for single element")
+	}
+
+	dll.RemoveTail() // Remove 10
+
+	// Should be empty
+	if dll.head != nil || dll.tail != nil {
+		t.Error("list should be empty after removing all elements")
+	}
+}
+
+func TestRemoveTail_BugCheck_PrevNodeNextPointer(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(1)
+	dll.InsertTail(2)
+	dll.InsertTail(3)
+
+	dll.RemoveTail() // Remove 3
+
+	// BUG: Check if the implementation sets the new tail's next to nil
+	if dll.tail.next != nil {
+		t.Error("BUG DETECTED: tail.next should be set to nil after RemoveTail")
+		t.Log("The current implementation only sets tail = tail.prev")
+		t.Log("It should also set tail.next = nil")
+	}
+}
+
+// ============================================================================
+// RemoveByRef Tests
+// ============================================================================
+
+func TestRemoveByRef_RemoveHead(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(10)
+	dll.InsertTail(20)
+	dll.InsertTail(30)
+
+	oldHead := dll.head
+	dll.RemoveByRef(oldHead)
+
+	// Head should now be 20
+	if dll.head.val != 20 {
+		t.Errorf("expected head value 20, got %d", dll.head.val)
+	}
+
+	// Head's prev should be nil
+	if dll.head.prev != nil {
+		t.Error("new head's prev should be nil")
+	}
+
+	expected := []int{20, 30}
+	if !equalSlices(dll.Forward(), expected) {
+		t.Errorf("Forward() = %v, want %v", dll.Forward(), expected)
+	}
+}
+
+func TestRemoveByRef_RemoveTail(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(10)
+	dll.InsertTail(20)
+	dll.InsertTail(30)
+
+	oldTail := dll.tail
+	dll.RemoveByRef(oldTail)
+
+	// Tail should now be 20
+	if dll.tail.val != 20 {
+		t.Errorf("expected tail value 20, got %d", dll.tail.val)
+	}
+
+	// Tail's next should be nil
+	if dll.tail.next != nil {
+		t.Error("new tail's next should be nil")
+	}
+
+	expected := []int{10, 20}
+	if !equalSlices(dll.Forward(), expected) {
+		t.Errorf("Forward() = %v, want %v", dll.Forward(), expected)
+	}
+}
+
+func TestRemoveByRef_RemoveMiddle(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(10)
+	dll.InsertTail(20)
+	dll.InsertTail(30)
+	dll.InsertTail(40)
+
+	// Get reference to middle node (20)
+	middle := dll.head.next
+	dll.RemoveByRef(middle)
+
+	// Should have 10, 30, 40
+	expected := []int{10, 30, 40}
+	if !equalSlices(dll.Forward(), expected) {
+		t.Errorf("Forward() = %v, want %v", dll.Forward(), expected)
+	}
+
+	// Check backward traversal
+	expectedBack := []int{40, 30, 10}
+	if !equalSlices(dll.Backward(), expectedBack) {
+		t.Errorf("Backward() = %v, want %v", dll.Backward(), expectedBack)
+	}
+
+	// Verify pointers are correctly linked
+	// 10.next should be 30
+	if dll.head.next.val != 30 {
+		t.Errorf("head.next should be 30, got %d", dll.head.next.val)
+	}
+
+	// 30.prev should be 10
+	if dll.head.next.prev.val != 10 {
+		t.Errorf("second node's prev should be 10, got %d", dll.head.next.prev.val)
+	}
+}
+
+func TestRemoveByRef_SingleElement(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(42)
+
+	node := dll.head
+	dll.RemoveByRef(node)
+
+	// List should be empty
+	if dll.head != nil {
+		t.Error("head should be nil after removing single element")
+	}
+	if dll.tail != nil {
+		t.Error("tail should be nil after removing single element")
+	}
+}
+
+func TestRemoveByRef_RemoveSecondToLast(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(10)
+	dll.InsertTail(20)
+	dll.InsertTail(30)
+
+	// Get reference to second node (20)
+	secondNode := dll.head.next
+	dll.RemoveByRef(secondNode)
+
+	// Should have 10, 30
+	expected := []int{10, 30}
+	if !equalSlices(dll.Forward(), expected) {
+		t.Errorf("Forward() = %v, want %v", dll.Forward(), expected)
+	}
+
+	// 10.next should be 30
+	if dll.head.next.val != 30 {
+		t.Errorf("head.next should be 30, got %d", dll.head.next.val)
+	}
+
+	// 30.prev should be 10
+	if dll.tail.prev.val != 10 {
+		t.Errorf("tail.prev should be 10, got %d", dll.tail.prev.val)
+	}
+}
+
+func TestRemoveByRef_BugCheck_MiddleNodeNextPointer(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(10)
+	dll.InsertTail(20)
+	dll.InsertTail(30)
+
+	// Get reference to middle node (20)
+	middle := dll.head.next
+	dll.RemoveByRef(middle)
+
+	// BUG: The current implementation doesn't update the next pointer
+	// when removing a middle node
+	// 10.next should point to 30, not to the removed node
+	if dll.head.next == middle {
+		t.Error("BUG DETECTED: head.next still points to removed node")
+		t.Log("RemoveByRef for middle nodes only updates prev.next")
+		t.Log("It should also update next.prev")
+	}
+
+	// Also check if 30.prev points to 10
+	thirdNode := dll.head.next
+	if thirdNode.prev != dll.head {
+		t.Error("BUG DETECTED: third node's prev doesn't point to head")
+		t.Log("RemoveByRef doesn't update the next node's prev pointer")
+	}
+}
+
+// ============================================================================
+// Mixed Operations Tests
+// ============================================================================
+
+func TestMixedRemoveOperations(t *testing.T) {
+	dll := NewDoublyLinkedList()
+
+	// Build list: 1, 2, 3, 4, 5
+	for i := 1; i <= 5; i++ {
+		dll.InsertTail(i)
+	}
+
+	dll.RemoveHead()               // Remove 1 -> [2,3,4,5]
+	dll.RemoveTail()               // Remove 5 -> [2,3,4]
+	dll.RemoveByRef(dll.head.next) // Remove 3 -> [2,4]
+
+	expected := []int{2, 4}
+	if !equalSlices(dll.Forward(), expected) {
+		t.Errorf("Forward() = %v, want %v", dll.Forward(), expected)
+	}
+
+	expectedBack := []int{4, 2}
+	if !equalSlices(dll.Backward(), expectedBack) {
+		t.Errorf("Backward() = %v, want %v", dll.Backward(), expectedBack)
+	}
+}
+
+func TestRemoveAll_UsingRemoveHead(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(1)
+	dll.InsertTail(2)
+	dll.InsertTail(3)
+
+	dll.RemoveHead()
+	dll.RemoveHead()
+	dll.RemoveHead()
+
+	// List should be empty
+	if dll.head != nil || dll.tail != nil {
+		t.Error("list should be empty")
+	}
+	if len(dll.Forward()) != 0 {
+		t.Error("Forward() should return empty slice")
+	}
+}
+
+func TestRemoveAll_UsingRemoveTail(t *testing.T) {
+	dll := NewDoublyLinkedList()
+	dll.InsertTail(1)
+	dll.InsertTail(2)
+	dll.InsertTail(3)
+
+	dll.RemoveTail()
+	dll.RemoveTail()
+	dll.RemoveTail()
+
+	// List should be empty
+	if dll.head != nil || dll.tail != nil {
+		t.Error("list should be empty")
+	}
+	if len(dll.Forward()) != 0 {
+		t.Error("Forward() should return empty slice")
+	}
+}
+
+func TestRemoveByRef_InterleavedWithInserts(t *testing.T) {
+	dll := NewDoublyLinkedList()
+
+	dll.InsertTail(10)
+	dll.InsertTail(20)
+
+	middle := dll.head.next
+	dll.InsertTail(30)
+
+	dll.RemoveByRef(middle) // Remove 20
+
+	expected := []int{10, 30}
+	if !equalSlices(dll.Forward(), expected) {
+		t.Errorf("Forward() = %v, want %v", dll.Forward(), expected)
+	}
+
+	dll.InsertTail(40)
+	dll.InsertHead(5)
+
+	expected = []int{5, 10, 30, 40}
+	if !equalSlices(dll.Forward(), expected) {
+		t.Errorf("Forward() = %v, want %v", dll.Forward(), expected)
+	}
+}

@@ -40,20 +40,41 @@
 
 package lrucache
 
+import "github.com/volodimyr/leetcode/ds"
+
 type LRUCache struct {
 	maxCapacity int
+	m           map[int]*ds.Dnode
+	queue       *ds.DoublyLinkedList
 }
 
 func Constructor(capacity int) LRUCache {
 	return LRUCache{
 		maxCapacity: capacity,
+		m:           make(map[int]*ds.Dnode),
+		queue:       ds.NewDoublyLinkedList(),
 	}
 }
 
 func (l *LRUCache) Put(key int, v int) {
-
+	found, ok := l.m[key]
+	if ok {
+		l.queue.RemoveByRef(found)
+		l.m[key] = l.queue.InsertHeadWithKey(v, key)
+		return
+	}
+	if len(l.m) == l.maxCapacity {
+		delete(l.m, l.queue.RemoveTailAndReturnKey())
+	}
+	l.m[key] = l.queue.InsertHeadWithKey(v, key)
 }
 
 func (l *LRUCache) Get(key int) int {
-	return -1
+	found, ok := l.m[key]
+	if !ok {
+		return -1
+	}
+	l.queue.RemoveByRef(found)
+	l.m[key] = l.queue.InsertHeadWithKey(found.Val(), key)
+	return found.Val()
 }

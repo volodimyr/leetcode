@@ -1,22 +1,42 @@
 package ds
 
 type DoublyLinkedList struct {
-	head *dnode
-	tail *dnode
+	head *Dnode
+	tail *Dnode
 }
 
-type dnode struct {
+type Dnode struct {
 	val  int
-	next *dnode
-	prev *dnode
+	key  int
+	next *Dnode
+	prev *Dnode
+}
+
+func (d Dnode) Val() int {
+	return d.val
+}
+
+func (d Dnode) Key() int {
+	return d.key
 }
 
 func NewDoublyLinkedList() *DoublyLinkedList {
 	return &DoublyLinkedList{}
 }
 
+func (d *DoublyLinkedList) InsertHeadWithKey(val, key int) *Dnode {
+	node := &Dnode{val: val, key: key, prev: nil, next: d.head}
+	if d.head != nil {
+		d.head.prev = node
+	} else {
+		d.tail = node
+	}
+	d.head = node
+	return d.head
+}
+
 func (d *DoublyLinkedList) InsertHead(val int) {
-	node := &dnode{val: val, prev: nil, next: d.head}
+	node := &Dnode{val: val, prev: nil, next: d.head}
 	if d.head != nil {
 		d.head.prev = node
 	} else {
@@ -26,7 +46,7 @@ func (d *DoublyLinkedList) InsertHead(val int) {
 }
 
 func (d *DoublyLinkedList) InsertTail(val int) {
-	node := &dnode{val: val, next: nil, prev: d.tail}
+	node := &Dnode{val: val, next: nil, prev: d.tail}
 	if d.tail != nil {
 		d.tail.next = node
 	} else {
@@ -55,12 +75,60 @@ func (d *DoublyLinkedList) Insert(index, val int) bool {
 		d.InsertTail(val)
 		return true
 	}
-	n := &dnode{val: val, next: curr.next, prev: curr}
+	n := &Dnode{val: val, next: curr.next, prev: curr}
 	curr.next = n
 	if n.next != nil {
 		n.next.prev = n
 	}
 	return true
+}
+
+func (d *DoublyLinkedList) RemoveByRef(ref *Dnode) {
+	if ref == d.head {
+		d.RemoveHead()
+		return
+	}
+	if ref == d.tail {
+		d.RemoveTail()
+		return
+	}
+	ref.prev.next = ref.next
+	ref.next.prev = ref.prev
+}
+
+func (d *DoublyLinkedList) RemoveHead() {
+	if d.head == nil {
+		return
+	}
+	if d.head == d.tail {
+		d.tail = nil
+		d.head = nil
+		return
+	}
+	d.head = d.head.next
+	d.head.prev = nil
+}
+
+func (d *DoublyLinkedList) RemoveTailAndReturnKey() int {
+	if d.tail == nil {
+		return -1
+	}
+	key := d.tail.Key()
+	d.RemoveTail()
+	return key
+}
+
+func (d *DoublyLinkedList) RemoveTail() {
+	if d.tail == nil {
+		return
+	}
+	if d.tail == d.head {
+		d.tail = nil
+		d.head = nil
+		return
+	}
+	d.tail = d.tail.prev
+	d.tail.next = nil
 }
 
 func (d *DoublyLinkedList) Remove(index int) bool {

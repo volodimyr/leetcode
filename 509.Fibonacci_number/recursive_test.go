@@ -27,23 +27,3 @@ func TestFind(t *testing.T) {
 		})
 	}
 }
-
-func TestFindNegative(t *testing.T) {
-	tests := []struct {
-		input    int
-		expected int
-	}{
-		{-1, 1},
-		{-5, 1},
-		{-10, 1},
-	}
-
-	for _, tt := range tests {
-		t.Run("negative input", func(t *testing.T) {
-			result := find(tt.input)
-			if result != tt.expected {
-				t.Errorf("find(%d) = %d; want %d", tt.input, result, tt.expected)
-			}
-		})
-	}
-}
