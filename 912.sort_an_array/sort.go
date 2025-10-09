@@ -24,10 +24,11 @@
 package sortanarray
 
 func sortArray(nums []int) []int {
-	return mergeSort(nums, 0, len(nums)-1)
+	mergeSort(nums, 0, len(nums)-1)
+	return nums
 }
 
-func mergeSort(nums []int, l, r int) []int {
+func mergeSort(nums []int, l, r int) {
 	if l < r {
 		m := (l + r) / 2
 		mergeSort(nums, l, m)
@@ -35,8 +36,6 @@ func mergeSort(nums []int, l, r int) []int {
 
 		merge(nums, l, m, r)
 	}
-
-	return nums
 }
 
 func merge(nums []int, l, m, r int) {
@@ -49,7 +48,7 @@ func merge(nums []int, l, m, r int) {
 	k := l
 
 	for i < len(L) && j < len(R) {
-		if L[i] < R[j] {
+		if L[i] <= R[j] {
 			nums[k] = L[i]
 			i++
 		} else {
