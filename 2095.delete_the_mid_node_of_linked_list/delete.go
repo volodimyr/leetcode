@@ -1,5 +1,6 @@
 // 2095. Delete the middle node of a linked list
 // Topics: 'Linked List', 'Two Pointers'
+// Level: 'Medium'
 
 // You are given the head of a linked list. Delete the middle node, and return the head of the modified linked list.
 
