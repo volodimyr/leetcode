@@ -38,7 +38,6 @@ func find(root *TreeNode, k *int, sm *int) {
 		*k--
 	}
 	find(root.Right, k, sm)
-	return
 }
 
 type TreeNode struct {
