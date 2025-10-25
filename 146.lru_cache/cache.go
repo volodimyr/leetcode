@@ -60,7 +60,8 @@ func (l *LRUCache) Put(key int, v int) {
 	found, ok := l.m[key]
 	if ok {
 		l.queue.RemoveByRef(found)
-		l.m[key] = l.queue.InsertHeadWithKey(v, key)
+		found.SetVal(v)
+		l.queue.InsertHeadByRef(found)
 		return
 	}
 	if len(l.m) == l.maxCapacity {
@@ -75,6 +76,6 @@ func (l *LRUCache) Get(key int) int {
 		return -1
 	}
 	l.queue.RemoveByRef(found)
-	l.m[key] = l.queue.InsertHeadWithKey(found.Val(), key)
+	l.queue.InsertHeadByRef(found)
 	return found.Val()
 }
