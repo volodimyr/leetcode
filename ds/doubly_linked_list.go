@@ -8,16 +8,33 @@ type DoublyLinkedList struct {
 type Dnode struct {
 	val  int
 	key  int
+	freq int
 	next *Dnode
 	prev *Dnode
 }
 
-func (d Dnode) Val() int {
+func NewDnode(key, val, freq int) *Dnode {
+	return &Dnode{val: val, key: key, freq: freq}
+}
+
+func (d *Dnode) Val() int {
 	return d.val
 }
 
-func (d Dnode) Key() int {
+func (d *Dnode) SetVal(v int) {
+	d.val = v
+}
+
+func (d *Dnode) Key() int {
 	return d.key
+}
+
+func (d *Dnode) Freq() int {
+	return d.freq
+}
+
+func (d *Dnode) FreqIncr() {
+	d.freq++
 }
 
 func NewDoublyLinkedList() *DoublyLinkedList {
@@ -35,10 +52,19 @@ func (d *DoublyLinkedList) InsertHeadWithKey(val, key int) *Dnode {
 	return d.head
 }
 
+func (d *DoublyLinkedList) InsertHeadByRef(node *Dnode) {
+	if d.head != nil {
+		d.head.prev, node.next = node, d.head
+	} else {
+		d.tail = node
+	}
+	d.head = node
+}
+
 func (d *DoublyLinkedList) InsertHead(val int) {
 	node := &Dnode{val: val, prev: nil, next: d.head}
 	if d.head != nil {
-		d.head.prev = node
+		d.head.prev, node.next = node, d.head
 	} else {
 		d.tail = node
 	}
@@ -81,6 +107,10 @@ func (d *DoublyLinkedList) Insert(index, val int) bool {
 		n.next.prev = n
 	}
 	return true
+}
+
+func (d *DoublyLinkedList) Empty() bool {
+	return d.head == nil
 }
 
 func (d *DoublyLinkedList) RemoveByRef(ref *Dnode) {
