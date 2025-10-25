@@ -35,11 +35,25 @@ package maximumsubarray
 
 func maxSubArray(nums []int) int {
 	_max := nums[0]
-	cur := 0
-	for _, n := range nums {
-		cur = max(cur, 0)
-		cur += n
+	cur := nums[0]
+	for _, n := range nums[1:] {
+		cur = max(n, cur+n)
 		_max = max(_max, cur)
 	}
 	return _max
+}
+
+func maxSubArraySlidingWindow(nums []int) int {
+	max := nums[0]
+	var curSum int
+	for R := range len(nums) {
+		if curSum < 0 {
+			curSum = 0
+		}
+		curSum += nums[R]
+		if curSum > max {
+			max = curSum
+		}
+	}
+	return max
 }
