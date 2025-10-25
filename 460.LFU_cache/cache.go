@@ -83,6 +83,9 @@ func (c *LFUCache) Get(k int) int {
 }
 
 func (c *LFUCache) Put(k int, v int) {
+	if c.maxCapacity == 0 {
+		return
+	}
 	if node, ok := c.nodes[k]; ok {
 		node.SetVal(v)
 		c.increaseFreq(node)
