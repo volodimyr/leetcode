@@ -35,34 +35,16 @@ import "sort"
 
 func numRescueBoats(people []int, limit int) int {
 	sort.Ints(people)
-	var (
-		boats int
-	)
-
+	boats := 0
 	L, R := 0, len(people)-1
-	for L < R {
-		if people[R] == limit {
-			R--
-			boats++
-			continue
-		}
-		weight := people[R] + people[L]
-		if weight == limit {
-			R--
-			L++
-			boats++
-		} else if weight > limit {
-			R--
-			boats++
-		} else {
-			L++
-			R--
-			boats++
-		}
 
-	}
-	if L == R {
+	for L <= R {
+		if people[L]+people[R] <= limit {
+			L++
+		}
+		R--
 		boats++
 	}
+
 	return boats
 }
