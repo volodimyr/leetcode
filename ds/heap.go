@@ -84,8 +84,7 @@ func (mh *MinHeap) Heapify(nums []int) {
 	mh.arr = nums
 	cur := (len(nums) - 1) / 2
 	for cur > 0 {
-		i := cur
-		mh.percolate(i)
+		mh.percolate(cur)
 		cur--
 	}
 }
