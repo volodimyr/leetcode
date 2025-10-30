@@ -64,17 +64,7 @@ func (mh *MinHeap) Pop() int {
 	mh.arr[1] = mh.arr[len(mh.arr)-1]
 	mh.arr = mh.arr[:len(mh.arr)-1]
 	i := 1
-	for 2*i < len(mh.arr) {
-		if 2*i+1 < len(mh.arr) && mh.arr[2*i+1] < mh.arr[2*i] && mh.arr[i] > mh.arr[2*i+1] {
-			mh.arr[2*i+1], mh.arr[i] = mh.arr[i], mh.arr[2*i+1]
-			i = 2*i + 1
-		} else if mh.arr[2*i] < mh.arr[i] {
-			mh.arr[2*i], mh.arr[i] = mh.arr[i], mh.arr[2*i]
-			i = 2 * i
-		} else {
-			break
-		}
-	}
+	mh.percolate(i)
 
 	return res
 }
@@ -87,7 +77,29 @@ func (mh *MinHeap) Top() int {
 }
 
 func (mh *MinHeap) Heapify(nums []int) {
-	for _, n := range nums {
-		mh.Push(n)
+	if len(nums) < 1 {
+		return
+	}
+	nums = append(nums, nums[0])
+	mh.arr = nums
+	cur := (len(nums) - 1) / 2
+	for cur > 0 {
+		i := cur
+		mh.percolate(i)
+		cur--
+	}
+}
+
+func (mh *MinHeap) percolate(i int) {
+	for 2*i < len(mh.arr) {
+		if 2*i+1 < len(mh.arr) && mh.arr[2*i+1] < mh.arr[2*i] && mh.arr[i] > mh.arr[2*i+1] {
+			mh.arr[2*i+1], mh.arr[i] = mh.arr[i], mh.arr[2*i+1]
+			i = 2*i + 1
+		} else if mh.arr[2*i] < mh.arr[i] {
+			mh.arr[2*i], mh.arr[i] = mh.arr[i], mh.arr[2*i]
+			i = 2 * i
+		} else {
+			break
+		}
 	}
 }
