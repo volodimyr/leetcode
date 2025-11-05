@@ -30,19 +30,45 @@ class ListNode:
         self.val = val
         self.next = next
 
-# Memory O(n), Time O(n)
+# Memory O(1), Time O(n)
 class Solution:
-    def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        arr = []
+    def isPalindrome(self, head: Optional[ListNode])->bool:
+        fast = head
+        slow = head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+        
+        # reverse
+        prev = None
+        while slow:
+            next = slow.next
+            slow.next = prev
+            prev = slow
+            slow = next
+        
         cur = head
-        while cur:
-            arr.append(cur.val)
+        while prev:
+            if prev.val != cur.val:
+                return False
+            prev= prev.next
             cur = cur.next
         
-        L, R = 0, len(arr)-1
-        while L < R:
-            if arr[L] != arr[R]:
-                return False
-            L+=1
-            R-=1
         return True
+
+# Memory O(n), Time O(n)
+# class Solution:
+#     def isPalindrome(self, head: Optional[ListNode]) -> bool:
+#         arr = []
+#         cur = head
+#         while cur:
+#             arr.append(cur.val)
+#             cur = cur.next
+        
+#         L, R = 0, len(arr)-1
+#         while L < R:
+#             if arr[L] != arr[R]:
+#                 return False
+#             L+=1
+#             R-=1
+#         return True
