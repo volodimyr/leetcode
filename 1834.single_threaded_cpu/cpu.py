@@ -64,7 +64,7 @@ class Solution:
         min_heap = []
         cur_time = sorted_tasks[-1].enqueue
         processed = []
-        while sorted_tasks or len(min_heap) > 0:             
+        while sorted_tasks or min_heap:             
             while sorted_tasks and sorted_tasks[-1].enqueue <= cur_time:
                 heapq.heappush(min_heap, sorted_tasks.pop())
             if len(min_heap) < 1:
