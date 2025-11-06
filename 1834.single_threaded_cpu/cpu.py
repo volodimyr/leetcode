@@ -67,11 +67,11 @@ class Solution:
         while sorted_tasks or min_heap:             
             while sorted_tasks and sorted_tasks[-1].enqueue <= cur_time:
                 heapq.heappush(min_heap, sorted_tasks.pop())
-            if len(min_heap) < 1:
+            if not min_heap:
                 cur_time = sorted_tasks[-1].enqueue
             else:
                 task = heapq.heappop(min_heap)
-                cur_time = cur_time+task.processing
+                cur_time = cur_time + task.processing
                 processed.append(task.index)
 
         return processed
