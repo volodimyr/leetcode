@@ -1,5 +1,5 @@
 // 155. Min Stack
-// Topics: 'Stack'
+// Topics: 'Stack', 'Design'
 // Level: 'Medium'
 
 // Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.

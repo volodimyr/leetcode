@@ -1,5 +1,6 @@
 // 284. Peeking Iterator
 // Topics: 'Array', 'Design', 'Iterator'
+// Level: 'Medium'
 
 // Design an iterator that supports the peek operation on an existing iterator in addition to the hasNext and the next operations.
 

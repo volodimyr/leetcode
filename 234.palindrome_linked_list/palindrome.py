@@ -1,5 +1,6 @@
 # 234. Palindrome Linked List
 # Topics: 'Stack', 'Recursion', 'Linked List', 'Two Pointers'
+
 # Given the head of a singly linked list, return true if it is a or false otherwise.
 
 # Example 1:

@@ -1,5 +1,6 @@
 // 981. Time based key-value store
 // Topics: 'String', 'Binary Search', 'Hash Table', 'Design'
+// Level: 'Medium'
 
 // Design a time-based key-value data structure that can store multiple values for the same key at different time stamps and retrieve the key's value at a certain timestamp.
 

@@ -1,5 +1,6 @@
 // 33. Search in rotated sorted array
 // Topics: 'Binary Search', 'Array'
+// Level: 'Medium'
 
 // There is an integer array nums sorted in ascending order (with distinct values).
 

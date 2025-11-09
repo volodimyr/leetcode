@@ -1,6 +1,6 @@
-#  209. Minimum size subarray sum
+# 209. Minimum size subarray sum
 # Topics: 'Sliding Window', 'Prefix Sum', 'Binary Search', 'Array'
-#  Level: 'Medium'
+# Level: 'Medium'
 
 # Given an array of positive integers nums and a positive integer target, return the minimal length of a
 

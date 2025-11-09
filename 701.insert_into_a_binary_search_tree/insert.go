@@ -1,5 +1,6 @@
 // 701. Insret into a binary search tree
 // Topics: 'Binary Search Tree', 'Tree', 'Binary Tree'
+// Level: 'Medium'
 
 // You are given the root node of a binary search tree (BST) and a value to insert into the tree.
 // Return the root node of the BST after the insertion.

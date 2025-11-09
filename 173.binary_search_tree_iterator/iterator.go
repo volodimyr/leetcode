@@ -1,5 +1,6 @@
 // 173. Binary search tree iterator
 // Topics: 'Stack', 'Tree', 'Design', 'Binary Search Tree', 'Binary Tree'
+// Level: 'Medium'
 
 // Implement the BSTIterator class that represents an iterator over the in-order traversal of a binary search tree (BST):
 

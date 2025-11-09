@@ -1,6 +1,6 @@
 // 142. Linked List Cycle II
-// Topics: 'Linked List'
-// Level: 'Medium', 'Hash Table', 'Two Pointers'
+// Topics: 'Linked List', 'Hash Table', 'Two Pointers'
+// Level: 'Medium'
 
 // Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.
 

@@ -1,5 +1,7 @@
+// 977. Squares of a Sorted Array
+// Topics: 'Array', 'Two Pointers', 'Sorting'
+
 // Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
-// Topics: 'Array' 'Two Pointers' 'Sorting'
 
 // Example 1:
 

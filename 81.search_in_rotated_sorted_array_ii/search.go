@@ -1,5 +1,6 @@
 // 81. Search in rotated sorted array II
 // Topics: 'Array', 'Binary Search'
+// Level: 'Medium'
 
 // There is an integer array nums sorted in non-decreasing order (not necessarily with distinct values).
 
