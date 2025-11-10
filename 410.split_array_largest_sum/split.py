@@ -32,6 +32,8 @@
 #     0 <= nums[i] <= 106
 #     1 <= k <= min(50, nums.length)
 
+from typing import List
+
 class Solution:
     def splitArray(self, nums: List[int], k: int) -> int:
         summ, maxx = sum(nums), max(nums)
