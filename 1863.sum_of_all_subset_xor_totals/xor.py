@@ -58,15 +58,23 @@ from typing import List
 
 class Solution:
     def subsetXORSum(self, nums: List[int]) -> int:
-        result = [0]
-        def find(i, cur):
-            if i >= len(nums):
-                result[0] += reduce(lambda x, y: x ^ y, cur) if cur else 0
-                return
-            cur.append(nums[i])
-            find(i+1, cur)
-            cur.pop()
-            find(i+1, cur)
+        def dfs(i, total):
+            if i == len(nums):
+                return total
+            return dfs(i+1, nums[i]^total) + dfs(i+1, total)
+        return dfs(0, 0)
 
-        find(0, [])
-        return result[0]
+# class Solution:
+#     def subsetXORSum(self, nums: List[int]) -> int:
+#         result = [0]
+#         def find(i, cur):
+#             if i >= len(nums):
+#                 result[0] += reduce(lambda x, y: x ^ y, cur) if cur else 0
+#                 return
+#             cur.append(nums[i])
+#             find(i+1, cur)
+#             cur.pop()
+#             find(i+1, cur)
+
+#         find(0, [])
+#         return result[0]
