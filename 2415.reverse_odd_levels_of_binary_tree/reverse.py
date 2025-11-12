@@ -57,27 +57,39 @@ class TreeNode:
 
 class Solution:
     def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        if not root:
-            return root
-        result = []
-        q = deque()
-        q.append(root)
-        level = 0
-        while q:
-            if level and level % 2 != 0:
-                L, R = 0, len(localq)-1
-                while L < R:
-                    localq[L].val, localq[R].val = localq[R].val, localq[L].val
-                    L+=1
-                    R-=1
-            localq = deque()
-            while q:
-                pop = q.popleft()
-                if pop.left:
-                    localq.append(pop.left)
-                if pop.right:
-                    localq.append(pop.right)
-            level+=1
-            q = localq
-            
+        def dfs(level, left, right):
+            if not left:
+                return root
+            if level % 2 == 1:
+                left.val, right.val = right.val, left.val
+            dfs(level+1, left.right, right.left)
+            dfs(level+1, left.left, right.right)
+        dfs(1, root.left, root.right)
         return root
+
+# class Solution:
+#     def reverseOddLevels(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+#         if not root:
+#             return root
+#         result = []
+#         q = deque()
+#         q.append(root)
+#         level = 0
+#         while q:
+#             if level and level % 2 != 0:
+#                 L, R = 0, len(localq)-1
+#                 while L < R:
+#                     localq[L].val, localq[R].val = localq[R].val, localq[L].val
+#                     L+=1
+#                     R-=1
+#             localq = deque()
+#             while q:
+#                 pop = q.popleft()
+#                 if pop.left:
+#                     localq.append(pop.left)
+#                 if pop.right:
+#                     localq.append(pop.right)
+#             level+=1
+#             q = localq
+            
+#         return root
