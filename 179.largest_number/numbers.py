@@ -34,9 +34,7 @@ class Solution:
         def compare(x, y):
             if x + y > y + x:
                 return -1
-            elif x + y < y + x:
-                return 1
-            return 0
+            return 1
         nums_str.sort(key=cmp_to_key(compare))
         if nums_str[0] == '0':
             return nums_str[0]
