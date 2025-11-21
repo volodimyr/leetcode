@@ -33,18 +33,31 @@
 from typing import List
 
 class Solution:
-   # time and space O(n)
    def climbStairs(self, n: int) -> int:
-      memo = [0]*(n+1)
-      return self.climb(n, memo)
+      if n < 2:
+         return n
+      
+      dp = [0, 1]
+      i = 2
+      while i <= n+1:
+         tmp = dp[1]
+         dp[1] = dp[0] + dp[1]
+         dp[0] = tmp
+         i+=1
+      return dp[1]
+
+   # time and space O(n)
+   # def climbStairs(self, n: int) -> int:
+   #    memo = [0]*(n+1)
+   #    return self.climb(n, memo)
    
-   def climb(self, n: int, memo: List[int]) -> int:
-      if n <= 1:
-         return 1
-      if memo[n]:
-         return memo[n]
-      memo[n] = self.climb(n-1, memo) + self.climb(n-2, memo)
-      return memo[n]
+   # def climb(self, n: int, memo: List[int]) -> int:
+   #    if n <= 1:
+   #       return 1
+   #    if memo[n]:
+   #       return memo[n]
+   #    memo[n] = self.climb(n-1, memo) + self.climb(n-2, memo)
+   #    return memo[n]
 
    #  bruteforce solution O(2^n)
    # def climbStairs(self, n: int) -> int:
