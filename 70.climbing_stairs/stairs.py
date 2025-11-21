@@ -33,18 +33,30 @@
 from typing import List
 
 class Solution:
-   def climbStairs(self, n: int) -> int:
+    def climbStairs(self, n: int) -> int:
       if n < 2:
          return n
-      
-      dp = [0, 1]
+      one, two = 0, 1
       i = 2
       while i <= n+1:
-         tmp = dp[1]
-         dp[1] = dp[0] + dp[1]
-         dp[0] = tmp
+         tmp = two
+         two = one+two
+         one = tmp
          i+=1
-      return dp[1]
+      return two
+
+   # def climbStairs(self, n: int) -> int:
+   #    if n < 2:
+   #       return n
+      
+   #    dp = [0, 1]
+   #    i = 2
+   #    while i <= n+1:
+   #       tmp = dp[1]
+   #       dp[1] = dp[0] + dp[1]
+   #       dp[0] = tmp
+   #       i+=1
+   #    return dp[1]
 
    # time and space O(n)
    # def climbStairs(self, n: int) -> int:
