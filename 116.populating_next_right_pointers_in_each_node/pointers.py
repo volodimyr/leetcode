@@ -53,21 +53,34 @@ class Node:
         self.right = right
         self.next = next
 
+# class Solution:
+#     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+#         if not root:
+#             return root
+#         q = deque()
+#         q.append(root)
+#         while q:
+#             prev = None
+#             for i in range(len(q)):
+#                 pop = q.popleft()
+#                 if pop.left:
+#                     q.append(pop.left)
+#                 if pop.right:
+#                     q.append(pop.right)
+#                 if prev:
+#                     prev.next = pop
+#                 prev = pop
+#         return root
+
 class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
         if not root:
             return root
-        q = deque()
-        q.append(root)
-        while q:
-            prev = None
-            for i in range(len(q)):
-                pop = q.popleft()
-                if pop.left:
-                    q.append(pop.left)
-                if pop.right:
-                    q.append(pop.right)
-                if prev:
-                    prev.next = pop
-                prev = pop
+        if root.left:
+            root.left.next = root.right
+            if root.next:
+                root.right.next = root.next.left
+
+            self.connect(root.left)
+            self.connect(root.right)
         return root
