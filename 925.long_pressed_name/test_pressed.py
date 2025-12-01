@@ -110,6 +110,4 @@ class TestIsLongPressedName(unittest.TestCase):
                         f"Input: name='{name}', typed='{typed}'. Expected False.")
 
 if __name__ == '__main__':
-    # You can run the tests by uncommenting the line below and executing the script.
-    # unittest.main(argv=['first-arg-is-ignored'], exit=False)
-    print("Run `unittest.main()` to execute the tests.")
+    unittest.main()
