@@ -39,17 +39,12 @@ class TreeNode:
         
 class Solution:
     def trimBST(self, root: Optional[TreeNode], low: int, high: int) -> Optional[TreeNode]:
-        if not root:
-            return root
-        if root.val < low:
+        if root and root.val < low:
             root = self.trimBST(root.right, low, high)
-        if not root:
-            return root
-        if root.val > high:
+        if root and root.val > high:
             root = self.trimBST(root.left, low, high)
         if not root:
             return root
-        
         root.left = self.trimBST(root.left, low, high)
         root.right = self.trimBST(root.right, low, high)
         
