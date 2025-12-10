@@ -51,7 +51,8 @@ class Solution:
         dead = set(deadends)
         if "0000" in dead:
             return -1
-        q = deque([("0000", 0)])
+        q = deque()
+        q.append(("0000", 0))
         visit = set("0000")
         while q:
             lock, steps = q.popleft()
@@ -64,6 +65,6 @@ class Solution:
                     new_char = str(new_digit)
                     nlock = lock[:i] + new_char + lock[i+1:]
                     if nlock not in visit and nlock not in dead:
-                        q.append([nlock, steps + 1])
+                        q.append((nlock, steps + 1))
                         visit.add(nlock)
         return -1
