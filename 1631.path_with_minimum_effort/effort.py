@@ -50,14 +50,14 @@ class Solution:
         if ROWS != 1:
             heapq.heappush(minheap, (abs(heights[0][0] - heights[1][0]), 1, 0))
 
-        shortest = {}
+        visit = set()
         while minheap:
             effort, i, j = heapq.heappop(minheap)
             if i == ROWS-1 and j == COLS-1:
                 return effort
-            if (i,j) in shortest:
+            if (i,j) in visit:
                 continue
-            shortest[(i,j)] = effort
+            visit.add((i,j))
 
             for dr, dc in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
                 i1, j1 = i+dr, j+dc
@@ -65,7 +65,7 @@ class Solution:
                     continue
                 if i1 == ROWS or j1 == COLS:
                     continue
-                if (i1, j1) not in shortest:
+                if (i1, j1) not in visit:
                     effort1 = abs(heights[i][j] - heights[i1][j1])
                     heapq.heappush(minheap, (max(effort, effort1), i1, j1))
         
