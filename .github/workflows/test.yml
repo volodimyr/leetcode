@@ -28,6 +28,13 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.14.1'
+          
+      - name: Run Python script-based tests
+        shell: bash
+        run: |
+          set -e
+          for test in $(find . -name "test_*.py"); do
+            echo "Running $test"
+            python -B "$test"
+          done
 
-      - name: Run Python unit tests
-        run: python -m unittest discover -v
