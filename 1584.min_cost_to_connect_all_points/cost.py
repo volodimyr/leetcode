@@ -38,7 +38,6 @@ from typing import List
 
 class Solution:
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
-        
         minheap = []
         for i in range (1, len(points)):
             dist = distance(points[0][0], points[0][1], points[i][0], points[i][1])

@@ -114,7 +114,7 @@ def test_duplicates_scattered():
     solution = Solution()
     nums = [1, 3, 1, 3, 1, 3, 2, 4, 5]
     result = solution.majorityElement(nums)
-    assert set(result) == {1, 3}, f"Expected [1, 3], got {result}"
+    assert result == [], f"Expected [], got {result}"
     print("✓ test_duplicates_scattered passed")
 
 
