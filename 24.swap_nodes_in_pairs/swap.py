@@ -48,23 +48,34 @@ class ListNode:
         
 class Solution:
     def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head:
+        if not head or not head.next:
             return head
-        
         cur = head
-        arr = []
-        while cur:
-            arr.append(cur.val)
-            cur = cur.next
+        curnext = head.next
+        cur.next = self.swapPairs(curnext.next)
+        curnext.next = cur
+        return curnext
+
+
+# wrong solution, violates specification of the task
+    # def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    #     if not head:
+    #         return head
         
-        for i in range(1, len(arr), 2):
-            arr[i], arr[i-1] = arr[i-1], arr[i]
+    #     cur = head
+    #     arr = []
+    #     while cur:
+    #         arr.append(cur.val)
+    #         cur = cur.next
         
-        cur = head
-        i = 0
-        while cur:
-            cur.val = arr[i]
-            i+=1
-            cur = cur.next
+    #     for i in range(1, len(arr), 2):
+    #         arr[i], arr[i-1] = arr[i-1], arr[i]
+        
+    #     cur = head
+    #     i = 0
+    #     while cur:
+    #         cur.val = arr[i]
+    #         i+=1
+    #         cur = cur.next
             
-        return head
+    #     return head
