@@ -46,13 +46,12 @@ from typing import List
 
 class Solution:
     def averageWaitingTime(self, customers: List[List[int]]) -> float:
-        cur_t = customers[0][0]
-        waits = []
+        cur_t = 0
+        wait = 0
         for a, w in customers:
             if a <= cur_t:
                 cur_t = cur_t+w
             else:
                 cur_t = a + w
-            waits.append(cur_t-a)
-        
-        return sum(waits) / len(waits)
+            wait += cur_t-a
+        return wait / len(customers)
