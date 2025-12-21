@@ -70,7 +70,7 @@ class Solution:
                 continue
 
             q = deque()
-            q.append((s, 1))
+            q.append((src, 1))
             res = -1
 
             visit = set()
