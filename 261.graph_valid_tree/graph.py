@@ -1,5 +1,5 @@
 # 261. Graph valid tree
-# Topics: 'Graph', 'Union Find', 'Depth-First Search'
+# Topics: 'Graph', 'Union Find', 'Depth-First Search', 'Breadth-First Search'
 # Level: 'Medium'
 
 # Given n nodes labeled from 0 to n - 1 and a list of undirected edges (each edge is a pair of nodes), write a function to check whether these edges make up a valid tree.
