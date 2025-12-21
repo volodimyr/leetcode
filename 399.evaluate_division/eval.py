@@ -48,6 +48,7 @@
 #     1 <= Cj.length, Dj.length <= 5
 #     Ai, Bi, Cj, Dj consist of lower case English letters and digits.
 
+from collections import deque
 from typing import List
 
 class Solution:
@@ -63,23 +64,51 @@ class Solution:
         
         arr = []
 
-        def dfs(src, target, visit):
-            if src not in adj:
-                return -1
-            if target not in adj:
-                return -1
-            if src == target:
-                return 1
-            
-            visit.add(src)
-            for neigh, weight in adj[src]:
-                if neigh not in visit:
-                    res = dfs(neigh, target, visit)
-                    if res != -1:
-                        return weight * res
-            return -1
-        
         for src, target in queries:
-            arr.append(dfs(src, target, set()))
+            if target not in adj:
+                arr.append(-1.0)
+                continue
+
+            q = deque()
+            q.append((s, 1))
+            res = -1
+
+            visit = set()
+            while q:
+                s, weight = q.popleft()
+                if s not in adj:
+                    break
+                if s == target:
+                    res = weight
+                    break
+                
+                visit.add(s)
+                for neigh, weight1 in adj[s]:
+                    if neigh not in visit:
+                        q.append((neigh, weight*weight1))
+            
+            arr.append(res)
 
         return arr
+
+
+        # def dfs(src, target, visit):
+        #     if src not in adj:
+        #         return -1
+        #     if target not in adj:
+        #         return -1
+        #     if src == target:
+        #         return 1
+            
+        #     visit.add(src)
+        #     for neigh, weight in adj[src]:
+        #         if neigh not in visit:
+        #             res = dfs(neigh, target, visit)
+        #             if res != -1:
+        #                 return weight * res
+        #     return -1
+        
+        # for src, target in queries:
+        #     arr.append(dfs(src, target, set()))
+
+        # return arr
