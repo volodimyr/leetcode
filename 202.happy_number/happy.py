@@ -34,19 +34,37 @@
 
 #     1 <= n <= 231 - 1
 
+# class Solution:
+#     def isHappy(self, n: int) -> bool:
+#         sqsum = self.calc(n)
+#         res = set()
+#         while sqsum not in res:
+#             res.add(sqsum)
+#             if sqsum == 1:
+#                 return True
+#             sqsum = self.calc(sqsum)
+#         return False
+
+#     def calc(self, n: int) -> int:
+#         out = 0
+#         while n:
+#             out += (n % 10) ** 2
+#             n //= 10
+#         return out
+
+# fast and slow solution
 class Solution:
     def isHappy(self, n: int) -> bool:
-        sqsum = self.calc(n)
-        res = set()
-        while sqsum not in res:
-            res.add(sqsum)
-            if sqsum == 1:
-                return True
-            sqsum = self.calc(sqsum)
-        return False
+        slow, fast = n, self.calc(n)
+        while slow != fast:
+            fast = self.calc(fast)
+            fast = self.calc(fast)
+            slow = self.calc(slow)
+        return True if slow == 1 else False
 
     def calc(self, n: int) -> int:
-        sqsum = 0
-        for char in str(n):
-            sqsum += int(char) ** 2
-        return sqsum
+        out = 0
+        while n:
+            out += (n % 10) ** 2
+            n //= 10
+        return out
