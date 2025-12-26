@@ -49,26 +49,11 @@ class Solution:
                     zeroes.append((i,j))
         
         for i, j in zeroes:
-            jleft = j
-            jright = j
-            while jleft != -1:
-                matrix[i][jleft] = 0
-                jleft-=1
-                    
-            while jright != COLS:
-                matrix[i][jright] = 0
-                jright+=1
-                    
-                itop = i
-                idown = i
+            for row in range(ROWS):
+                matrix[row][j] = 0
+            for col in range(COLS):
+                matrix[i][col]= 0
 
-            while itop != -1:
-                matrix[itop][j] = 0
-                itop-=1 
-                    
-            while idown != ROWS:
-                matrix[idown][j] = 0
-                idown+=1
                 
                 
                 
