@@ -46,14 +46,21 @@ class TreeNode:
         
 class Solution:
     def tree2str(self, root: Optional[TreeNode]) -> str:
-        if not root:
-            return ""
-        res = str(root.val)
-        if root.left:
-            res += "(" + self.tree2str(root.left) + ")"
-        if not root.left and root.right:
-            res += "()"
-        if root.right:
-            res += "(" + self.tree2str(root.right) + ")"
-        
-        return res
+        res = []
+        def dfs(root: Optional[TreeNode]):
+            if not root:
+                return
+            res.append(str(root.val))
+            if root.left:
+                res.append('(')
+                dfs(root.left)
+                res.append(')')
+            if not root.left and root.right:
+                res.append('()')
+            if root.right:
+                res.append('(')
+                dfs(root.right)
+                res.append(')')
+
+        dfs(root)
+        return ''.join(res)
