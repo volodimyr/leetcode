@@ -40,54 +40,83 @@ from typing import List
 
 class Solution:
     def minMutation(self, startGene: str, endGene: str, bank: List[str]) -> int:
+        set_bank = set(bank)
         if startGene == endGene:
             return 0
-        if endGene not in bank:
+        if endGene not in set_bank:
             return -1
-        adj = {}
-        adj[startGene] = []
-        for i in range(len(bank)):
-            adj[bank[i]] = []
-            if self.has_edge(startGene, bank[i]):
-                adj[startGene].append(bank[i])
-                adj[bank[i]].append(startGene)
-        
-        for i in range(len(bank)-1):
-            for j in range(i+1, len(bank)):
-                if self.has_edge(bank[i], bank[j]):
-                    adj[bank[i]].append(bank[j])
-                    adj[bank[j]].append(bank[i])
         
         q = deque()
+        q.append((startGene, 0))
+        genes = ['A', 'C', 'G', 'T']
         visit = set()
         visit.add(startGene)
-        for dst in adj[startGene]:
-            visit.add(dst)
-            q.append(dst)
         
-        count = 0
         while q:
-            count+=1
-            for i in range(len(q)):
-                pop = q.popleft()
-                if pop == endGene:
-                    return count
-                for dst in adj[pop]:
-                    if dst not in visit:
-                        visit.add(dst)
-                        q.append(dst)
+            pop, steps = q.popleft()
+            if pop == endGene:
+                return steps
+
+            for i in range(8):
+                for char in genes:
+                    if char == pop[i]:
+                        continue
+                    mutation = pop[:i] + char + pop[i+1:]
+                    if mutation not in visit and mutation in set_bank:
+                        visit.add(mutation)
+                        q.append((mutation, steps+1))
+        return -1
+
+# class Solution:
+#     def minMutation(self, startGene: str, endGene: str, bank: List[str]) -> int:
+#         if startGene == endGene:
+#             return 0
+#         if endGene not in bank:
+#             return -1
+#         adj = {}
+#         adj[startGene] = []
+#         for i in range(len(bank)):
+#             adj[bank[i]] = []
+#             if self.has_edge(startGene, bank[i]):
+#                 adj[startGene].append(bank[i])
+#                 adj[bank[i]].append(startGene)
+        
+#         for i in range(len(bank)-1):
+#             for j in range(i+1, len(bank)):
+#                 if self.has_edge(bank[i], bank[j]):
+#                     adj[bank[i]].append(bank[j])
+#                     adj[bank[j]].append(bank[i])
+        
+#         q = deque()
+#         visit = set()
+#         visit.add(startGene)
+#         for dst in adj[startGene]:
+#             visit.add(dst)
+#             q.append(dst)
+        
+#         count = 0
+#         while q:
+#             count+=1
+#             for i in range(len(q)):
+#                 pop = q.popleft()
+#                 if pop == endGene:
+#                     return count
+#                 for dst in adj[pop]:
+#                     if dst not in visit:
+#                         visit.add(dst)
+#                         q.append(dst)
 
                 
-        return -1
+#         return -1
     
-    def has_edge(self, g1: str, g2: str) -> bool:
-        if g1 == g2:
-            return False
-        count = 0
-        for i in range(8):
-            if g1[i] != g2[i]:
-                count+=1
-            if count > 1:
-                return False
+#     def has_edge(self, g1: str, g2: str) -> bool:
+#         if g1 == g2:
+#             return False
+#         count = 0
+#         for i in range(8):
+#             if g1[i] != g2[i]:
+#                 count+=1
+#             if count > 1:
+#                 return False
 
-        return True
+#         return True
