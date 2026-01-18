@@ -42,13 +42,13 @@ from typing import List
 class Solution:
     def lemonadeChange(self, bills: List[int]) -> bool:
         five, ten = 0, 0
-
         for b in bills:
             change = b - 5
             
             while ten and change > 0 and change - 10 >= 0:
                 change -= 10
                 ten -= 1
+                break
 
             while five and change > 0:
                 change -= 5
