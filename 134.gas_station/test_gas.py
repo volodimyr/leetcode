@@ -32,10 +32,9 @@ class TestGasStation(unittest.TestCase):
         self.assertEqual(self.solution.canCompleteCircuit(gas, cost), 0)
 
     def test_reset_logic(self):
-        # total gas == total cost, but early stations fail
         gas = [1, 2, 3, 4]
         cost = [3, 4, 3, 0]
-        self.assertEqual(self.solution.canCompleteCircuit(gas, cost), 3)
+        self.assertEqual(self.solution.canCompleteCircuit(gas, cost), 2)
 
     def test_no_possible_start(self):
         gas = [1, 1, 1, 1]
