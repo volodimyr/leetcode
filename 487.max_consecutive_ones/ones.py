@@ -39,6 +39,8 @@
 # you can't store all numbers coming from the stream as it's too large to hold in memory.
 # Could you solve it efficiently?
 
+from typing import List
+
 class Solution:
     def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
         L = R = 0
