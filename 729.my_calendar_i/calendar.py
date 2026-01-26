@@ -39,11 +39,31 @@
 class MyCalendar:
     def __init__(self):
         self.events = []
-
     def book(self, startTime: int, endTime: int) -> bool:
-        for s, e in self.events:
-            if max(s, startTime) < min(e, endTime):
-                return False
-        self.events.append((startTime, endTime))
+        L, R = 0, len(self.events)
+        while L < R:
+            M = (L+R)//2
+            if self.events[M][0] < startTime:
+                L = M + 1
+            else:
+                R = M
+        idx = L
+        if idx > 0 and self.events[idx-1][1] > startTime:
+            return False
+        if idx < len(self.events) and self.events[idx][0] < endTime:
+            return False
+        self.events.insert(idx, (startTime, endTime))
         return True
+
+# O(n)
+# class MyCalendar:
+#     def __init__(self):
+#         self.events = []
+
+#     def book(self, startTime: int, endTime: int) -> bool:
+#         for s, e in self.events:
+#             if max(s, startTime) < min(e, endTime):
+#                 return False
+#         self.events.append((startTime, endTime))
+#         return True
         
