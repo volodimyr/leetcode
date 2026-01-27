@@ -37,30 +37,74 @@
 
 class Solution:
     def checkValidString(self, s: str) -> bool:
-        stack = []
-        asterix = []
-
-        for i in range(len(s)):
-            ch = s[i]
-            if ch == '(':
-                stack.append(i)
-            elif ch == '*':
-                asterix.append(i)
+        leftmin, leftmax = 0, 0
+        for c in s:
+            if c == "(":
+                leftmin+=1
+                leftmax+=1
+            elif c == ")":
+                leftmin-=1
+                leftmax-=1
             else:
-                if stack:
-                    stack.pop()
-                elif not asterix:
-                    return False
-                else:
-                    asterix.pop()
-        
-        while stack:
-            if not asterix:
+                leftmin-=1
+                leftmax+=1
+                
+            if leftmin < 0:
+                leftmin = 0
+            if leftmax < 0:
                 return False
-            if asterix[-1] < stack[-1]:
-                return False
-            stack.pop()
-            asterix.pop()
         
-        return True
+        return leftmin == 0
+
+# class Solution:
+#     def checkValidString(self, s: str) -> bool:
+#         N = len(s)
+#         memo = {}
+#         def dfs(i, o):
+#             if o < 0:
+#                 return False
+#             if i == N:
+#                 return o == 0
+#             if (i,o) in memo:
+#                 return memo[(i, o)]
+#             ch = s[i]
+#             if ch == '(':
+#                 memo[(i,o)] = dfs(i+1, o+1)
+#             elif ch == ')':
+#                 memo[(i,o)] = dfs(i+1, o-1)
+#             else: 
+#                 memo[(i,o)] = (dfs(i+1, o) or dfs(i+1, o+1) or dfs(i+1, o-1))
+
+#             return memo[(i,o)]
+        
+#         return dfs(0, 0)
+
+# class Solution:
+#     def checkValidString(self, s: str) -> bool:
+#         stack = []
+#         asterix = []
+
+#         for i in range(len(s)):
+#             ch = s[i]
+#             if ch == '(':
+#                 stack.append(i)
+#             elif ch == '*':
+#                 asterix.append(i)
+#             else:
+#                 if stack:
+#                     stack.pop()
+#                 elif not asterix:
+#                     return False
+#                 else:
+#                     asterix.pop()
+        
+#         while stack:
+#             if not asterix:
+#                 return False
+#             if asterix[-1] < stack[-1]:
+#                 return False
+#             stack.pop()
+#             asterix.pop()
+        
+#         return True
         
