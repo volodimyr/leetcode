@@ -62,7 +62,6 @@ class Solution:
             
         return i == len(nums)
 
-    
     def increasing(self, i, nums) -> int:
         while i < len(nums) and nums[i-1] < nums[i]:
             i+=1
