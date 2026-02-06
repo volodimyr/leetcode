@@ -47,6 +47,7 @@
 #     0 <= sr < m
 #     0 <= sc < n
 
+from collections import deque
 from typing import List
 
 class Solution:
@@ -71,4 +72,33 @@ class Solution:
 
         return image
 
+
+# BFS approach
+# class Solution:
+#     def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+#         if not image:
+#             return image
+#         if image[sr][sc] == color:
+#             return image
+#         ROWS,COLS = len(image), len(image[0])
+        
+#         org_col = image[sr][sc]
+#         q = deque()
+#         q.append((sr,sc))
+
+#         while q:
+#             r,c = q.popleft()
+#             image[r][c] = color
+
+#             for dr,dc in ((1,0),(-1,0),(0,1),(0,-1)):
+#                 ndr,ndc = r+dr,c+dc
+#                 if min(ndr, ndc) < 0:
+#                     continue
+#                 if ndr >= ROWS or ndc >= COLS:
+#                     continue
+#                 if image[ndr][ndc] != org_col:
+#                     continue
+#                 q.append((ndr,ndc))
+        
+#         return image
             
