@@ -33,32 +33,77 @@
 #     It's guaranteed that you can reach nums[n - 1].
 
 from collections import deque
+import heapq
 import math
 from typing import List
 
-
-# O(n^2) time solution
 class Solution:
     def jump(self, nums: List[int]) -> int:
         if len(nums) == 1:
             return 0
-        q = deque()
-        for i in range(1, nums[0]+1):
-            q.append((i, 1))
         
-        N = len(nums)-1
-        visited = set()
-        while q:
-            i, steps = q.popleft()
-            visited.add(i)
-            if i >= N:
-                return steps
+        L, R = 0, 0
+        steps = 0
 
-            for j in range(1, nums[i]+1):
-                if (j+i) not in visited:
-                    q.append((j+i, steps+1))
+        while R < len(nums)-1:
+            farthest = 0
+            for i in range(L, R+1):
+                farthest = max(farthest, i+nums[i])
+
+            L = R+1
+            R = farthest
+            steps += 1
         
-        return -1
+        return steps
+
+
+# O(n * M log k) :)
+# class Solution:
+#     def jump(self, nums: List[int]) -> int:
+#         if len(nums) == 1:
+#             return 0
+#         h = []
+#         for i in range(1, nums[0]+1):
+#             heapq.heappush(h, (1, -i))
+        
+#         N = len(nums)-1
+#         visited = set()
+#         while h:
+#             steps, i = heapq.heappop(h)
+#             i = -i
+#             visited.add(i)
+#             if i >= N:
+#                 return steps
+
+#             for j in range(1, nums[i]+1):
+#                 if (j+i) not in visited:
+#                     heapq.heappush(h, (steps+1, -(j+i)))
+#         return -1
+
+
+
+# O(n^2) time solution
+# class Solution:
+#     def jump(self, nums: List[int]) -> int:
+#         if len(nums) == 1:
+#             return 0
+#         q = deque()
+#         for i in range(1, nums[0]+1):
+#             q.append((i, 1))
+        
+#         N = len(nums)-1
+#         visited = set()
+#         while q:
+#             i, steps = q.popleft()
+#             visited.add(i)
+#             if i >= N:
+#                 return steps
+
+#             for j in range(1, nums[i]+1):
+#                 if (j+i) not in visited:
+#                     q.append((j+i, steps+1))
+        
+#         return -1
 
 
 
