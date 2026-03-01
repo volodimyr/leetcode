@@ -1,6 +1,5 @@
 # 1474. Delete N Nodes After M Nodes of a Linked List
 # Topics: 'Linked List'
-# Level: 'Medium'
 
 # You are given the head of a linked list and two integers m and n.
 
