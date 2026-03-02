@@ -54,17 +54,14 @@ from typing import List
 
 class Solution:
     def connectSticks(self, sticks: List[int]) -> int:
-        h = []
-        for s in sticks:
-            heapq.heappush(h, s)
-
+        heapq.heapify(sticks)
         res = 0
         while True:
-            first = heapq.heappop(h)
-            if not h:
+            first = heapq.heappop(sticks)
+            if not sticks:
                 break
-            second = heapq.heappop(h)
+            second = heapq.heappop(sticks)
             third = first + second
-            heapq.heappush(h, third)
+            heapq.heappush(sticks, third)
             res += third
         return res
