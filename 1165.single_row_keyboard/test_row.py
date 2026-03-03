@@ -1,5 +1,5 @@
 import unittest
-from keyboard import Solution
+from row import Solution
 
 
 class TestSingleRowKeyboard(unittest.TestCase):
