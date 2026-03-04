@@ -56,5 +56,5 @@ class Solution:
                 pass
             else:
                 arr.append(log)
-        
+
         return len(arr)
