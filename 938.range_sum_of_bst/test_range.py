@@ -34,7 +34,7 @@ def test_example_1():
     root = build_tree([10, 5, 15, 3, 7, None, 18])
     result = sol.rangeSumBST(root, 7, 15)
     assert result == 32, f"Expected 32, got {result}"
-    print("✓ Test Example 1 passed")
+    print("[PASS] Test Example 1 passed")
 
 
 def test_example_2():
@@ -43,7 +43,7 @@ def test_example_2():
     root = build_tree([10, 5, 15, 3, 7, 13, 18, 1, None, 6])
     result = sol.rangeSumBST(root, 6, 10)
     assert result == 23, f"Expected 23, got {result}"
-    print("✓ Test Example 2 passed")
+    print("[PASS] Test Example 2 passed")
 
 
 def test_single_node_in_range():
@@ -52,7 +52,7 @@ def test_single_node_in_range():
     root = TreeNode(10)
     result = sol.rangeSumBST(root, 5, 15)
     assert result == 10, f"Expected 10, got {result}"
-    print("✓ Test single node in range passed")
+    print("[PASS] Test single node in range passed")
 
 
 def test_single_node_out_of_range():
@@ -61,7 +61,7 @@ def test_single_node_out_of_range():
     root = TreeNode(10)
     result = sol.rangeSumBST(root, 15, 20)
     assert result == 0, f"Expected 0, got {result}"
-    print("✓ Test single node out of range passed")
+    print("[PASS] Test single node out of range passed")
 
 
 def test_all_nodes_in_range():
@@ -70,7 +70,7 @@ def test_all_nodes_in_range():
     root = build_tree([10, 5, 15, 3, 7])
     result = sol.rangeSumBST(root, 1, 20)
     assert result == 40, f"Expected 40, got {result}"
-    print("✓ Test all nodes in range passed")
+    print("[PASS] Test all nodes in range passed")
 
 
 def test_no_nodes_in_range():
@@ -79,7 +79,7 @@ def test_no_nodes_in_range():
     root = build_tree([10, 5, 15, 3, 7])
     result = sol.rangeSumBST(root, 20, 30)
     assert result == 0, f"Expected 0, got {result}"
-    print("✓ Test no nodes in range passed")
+    print("[PASS] Test no nodes in range passed")
 
 
 def test_range_equals_root():
@@ -88,7 +88,7 @@ def test_range_equals_root():
     root = build_tree([10, 5, 15])
     result = sol.rangeSumBST(root, 10, 10)
     assert result == 10, f"Expected 10, got {result}"
-    print("✓ Test range equals root passed")
+    print("[PASS] Test range equals root passed")
 
 
 def test_only_left_subtree_in_range():
@@ -97,7 +97,7 @@ def test_only_left_subtree_in_range():
     root = build_tree([10, 5, 15, 3, 7])
     result = sol.rangeSumBST(root, 3, 7)
     assert result == 15, f"Expected 15, got {result}"
-    print("✓ Test only left subtree in range passed")
+    print("[PASS] Test only left subtree in range passed")
 
 
 def test_only_right_subtree_in_range():
@@ -106,7 +106,7 @@ def test_only_right_subtree_in_range():
     root = build_tree([10, 5, 15, 3, 7, 12, 18])
     result = sol.rangeSumBST(root, 12, 20)
     assert result == 45, f"Expected 45, got {result}"
-    print("✓ Test only right subtree in range passed")
+    print("[PASS] Test only right subtree in range passed")
 
 def test_unbalanced_tree():
     """Test with an unbalanced tree (left-skewed)"""
@@ -117,7 +117,7 @@ def test_unbalanced_tree():
     root.left.left.left = TreeNode(1)
     result = sol.rangeSumBST(root, 1, 5)
     assert result == 9, f"Expected 9, got {result}"
-    print("✓ Test unbalanced tree passed")
+    print("[PASS] Test unbalanced tree passed")
 
 
 def test_minimum_values():
@@ -126,7 +126,7 @@ def test_minimum_values():
     root = TreeNode(1)
     result = sol.rangeSumBST(root, 1, 1)
     assert result == 1, f"Expected 1, got {result}"
-    print("✓ Test minimum values passed")
+    print("[PASS] Test minimum values passed")
 
 
 def run_all_tests():
@@ -145,7 +145,7 @@ def run_all_tests():
     test_unbalanced_tree()
     test_minimum_values()
     
-    print("\n✅ All tests passed!")
+    print("\n[PASS] All tests passed!")
 
 
 if __name__ == "__main__":

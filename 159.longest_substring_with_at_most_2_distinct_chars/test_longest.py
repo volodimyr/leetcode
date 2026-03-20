@@ -7,11 +7,11 @@ def test_basic_examples():
     
     # Example 1
     assert sol.lengthOfLongestSubstringTwoDistinct("eceba") == 3, "Failed: eceba should return 3"
-    print("✓ Example 1: 'eceba' -> 3 (substring: 'ece')")
+    print("[PASS] Example 1: 'eceba' -> 3 (substring: 'ece')")
     
     # Example 2
     assert sol.lengthOfLongestSubstringTwoDistinct("ccaabbb") == 5, "Failed: ccaabbb should return 5"
-    print("✓ Example 2: 'ccaabbb' -> 5 (substring: 'aabbb' or 'caaab')")
+    print("[PASS] Example 2: 'ccaabbb' -> 5 (substring: 'aabbb' or 'caaab')")
 
 
 def test_edge_cases():
@@ -20,19 +20,19 @@ def test_edge_cases():
     
     # Empty string
     assert sol.lengthOfLongestSubstringTwoDistinct("") == 0, "Failed: empty string"
-    print("✓ Edge case: Empty string -> 0")
+    print("[PASS] Edge case: Empty string -> 0")
     
     # Single character
     assert sol.lengthOfLongestSubstringTwoDistinct("a") == 1, "Failed: single char"
-    print("✓ Edge case: 'a' -> 1")
+    print("[PASS] Edge case: 'a' -> 1")
     
     # Two characters (same)
     assert sol.lengthOfLongestSubstringTwoDistinct("aa") == 2, "Failed: two same chars"
-    print("✓ Edge case: 'aa' -> 2")
+    print("[PASS] Edge case: 'aa' -> 2")
     
     # Two characters (different)
     assert sol.lengthOfLongestSubstringTwoDistinct("ab") == 2, "Failed: two different chars"
-    print("✓ Edge case: 'ab' -> 2")
+    print("[PASS] Edge case: 'ab' -> 2")
 
 
 def test_all_same_character():
@@ -40,10 +40,10 @@ def test_all_same_character():
     sol = Solution()
     
     assert sol.lengthOfLongestSubstringTwoDistinct("aaaa") == 4, "Failed: all same"
-    print("✓ All same: 'aaaa' -> 4")
+    print("[PASS] All same: 'aaaa' -> 4")
     
     assert sol.lengthOfLongestSubstringTwoDistinct("zzzzzzzz") == 8, "Failed: 8 z's"
-    print("✓ All same: 'zzzzzzzz' -> 8")
+    print("[PASS] All same: 'zzzzzzzz' -> 8")
 
 
 def test_two_distinct_characters():
@@ -51,13 +51,13 @@ def test_two_distinct_characters():
     sol = Solution()
     
     assert sol.lengthOfLongestSubstringTwoDistinct("aabb") == 4, "Failed: aabb"
-    print("✓ Two distinct: 'aabb' -> 4")
+    print("[PASS] Two distinct: 'aabb' -> 4")
     
     assert sol.lengthOfLongestSubstringTwoDistinct("abababab") == 8, "Failed: alternating"
-    print("✓ Two distinct: 'abababab' -> 8")
+    print("[PASS] Two distinct: 'abababab' -> 8")
     
     assert sol.lengthOfLongestSubstringTwoDistinct("aaabbb") == 6, "Failed: aaabbb"
-    print("✓ Two distinct: 'aaabbb' -> 6")
+    print("[PASS] Two distinct: 'aaabbb' -> 6")
 
 
 def test_large_inputs():
@@ -67,18 +67,18 @@ def test_large_inputs():
     # Large string with 2 distinct characters
     s1 = "a" * 50000 + "b" * 50000
     assert sol.lengthOfLongestSubstringTwoDistinct(s1) == 100000, "Failed: large two distinct"
-    print("✓ Large input: 100,000 chars with 2 distinct -> 100000")
+    print("[PASS] Large input: 100,000 chars with 2 distinct -> 100000")
     
     # Large string with many characters
     s2 = "abc" * 10000
     result = sol.lengthOfLongestSubstringTwoDistinct(s2)
     assert result == 2, "Failed: large repeating pattern"
-    print(f"✓ Large input: 30,000 chars with pattern 'abc'*10000 -> {result}")
+    print(f"[PASS] Large input: 30,000 chars with pattern 'abc'*10000 -> {result}")
     
     # Worst case: all different characters
     s3 = "".join(chr(97 + i % 26) for i in range(1000))
     result = sol.lengthOfLongestSubstringTwoDistinct(s3)
-    print(f"✓ Large input: 1,000 chars cycling through alphabet -> {result}")
+    print(f"[PASS] Large input: 1,000 chars cycling through alphabet -> {result}")
 
 
 def test_special_sequences():
@@ -87,15 +87,15 @@ def test_special_sequences():
     
     # Repeating triplets
     assert sol.lengthOfLongestSubstringTwoDistinct("aaabbbccc") == 6, "Failed: repeating triplets"
-    print("✓ Special: 'aaabbbccc' -> 6 ('aaabbb' or 'bbbccc')")
+    print("[PASS] Special: 'aaabbbccc' -> 6 ('aaabbb' or 'bbbccc')")
     
     # Single char interruption
     assert sol.lengthOfLongestSubstringTwoDistinct("aaaaacaaaaa") == 11, "Failed: interruption"
-    print("✓ Special: 'aaaaacaaaaa' -> 11")
+    print("[PASS] Special: 'aaaaacaaaaa' -> 11")
     
     # Palindrome-like
     assert sol.lengthOfLongestSubstringTwoDistinct("abba") == 4, "Failed: abba"
-    print("✓ Special: 'abba' -> 4")
+    print("[PASS] Special: 'abba' -> 4")
 
 
 def run_all_tests():
@@ -123,10 +123,10 @@ def run_all_tests():
             test_func()
             passed += 1
         except AssertionError as e:
-            print(f"❌ {suite_name} FAILED: {e}")
+            print(f"[FAIL] {suite_name} FAILED: {e}")
             failed += 1
         except Exception as e:
-            print(f"❌ {suite_name} ERROR: {e}")
+            print(f"[FAIL] {suite_name} ERROR: {e}")
             failed += 1
     
     print("\n" + "=" * 60)
@@ -134,7 +134,7 @@ def run_all_tests():
     print("=" * 60)
     
     if failed == 0:
-        print("🎉 ALL TESTS PASSED! 🎉")
+        print("[OK] ALL TESTS PASSED! [OK]")
     
     return failed == 0
 

@@ -7,7 +7,7 @@ def test_example1():
     nums = [3, 2, 3]
     result = solution.majorityElement(nums)
     assert result == [3], f"Expected [3], got {result}"
-    print("✓ test_example1 passed")
+    print("[PASS] test_example1 passed")
 
 
 def test_example2():
@@ -16,7 +16,7 @@ def test_example2():
     nums = [1]
     result = solution.majorityElement(nums)
     assert result == [1], f"Expected [1], got {result}"
-    print("✓ test_example2 passed")
+    print("[PASS] test_example2 passed")
 
 
 def test_example3():
@@ -25,7 +25,7 @@ def test_example3():
     nums = [1, 2]
     result = solution.majorityElement(nums)
     assert set(result) == {1, 2}, f"Expected [1, 2], got {result}"
-    print("✓ test_example3 passed")
+    print("[PASS] test_example3 passed")
 
 
 def test_two_majority_elements():
@@ -34,7 +34,7 @@ def test_two_majority_elements():
     nums = [1, 1, 1, 2, 2, 2, 3]
     result = solution.majorityElement(nums)
     assert set(result) == {1, 2}, f"Expected [1, 2], got {result}"
-    print("✓ test_two_majority_elements passed")
+    print("[PASS] test_two_majority_elements passed")
 
 
 def test_single_majority_element():
@@ -43,7 +43,7 @@ def test_single_majority_element():
     nums = [1, 1, 1, 2, 3, 4, 5]
     result = solution.majorityElement(nums)
     assert result == [1], f"Expected [1], got {result}"
-    print("✓ test_single_majority_element passed")
+    print("[PASS] test_single_majority_element passed")
 
 
 def test_all_same_elements():
@@ -52,7 +52,7 @@ def test_all_same_elements():
     nums = [5, 5, 5, 5, 5]
     result = solution.majorityElement(nums)
     assert result == [5], f"Expected [5], got {result}"
-    print("✓ test_all_same_elements passed")
+    print("[PASS] test_all_same_elements passed")
 
 
 def test_no_majority_element():
@@ -61,7 +61,7 @@ def test_no_majority_element():
     nums = [1, 2, 3, 4, 5, 6]
     result = solution.majorityElement(nums)
     assert result == [], f"Expected [], got {result}"
-    print("✓ test_no_majority_element passed")
+    print("[PASS] test_no_majority_element passed")
 
 
 def test_negative_numbers():
@@ -70,7 +70,7 @@ def test_negative_numbers():
     nums = [-1, -1, -1, 0, 0, 0, 1]
     result = solution.majorityElement(nums)
     assert set(result) == {-1, 0}, f"Expected [-1, 0], got {result}"
-    print("✓ test_negative_numbers passed")
+    print("[PASS] test_negative_numbers passed")
 
 
 def test_large_numbers():
@@ -79,7 +79,7 @@ def test_large_numbers():
     nums = [1000000000, 1000000000, 1000000000, -1000000000]
     result = solution.majorityElement(nums)
     assert result == [1000000000], f"Expected [1000000000], got {result}"
-    print("✓ test_large_numbers passed")
+    print("[PASS] test_large_numbers passed")
 
 
 def test_exactly_threshold():
@@ -88,7 +88,7 @@ def test_exactly_threshold():
     nums = [1, 1, 2, 2, 3, 3]  # n=6, n//3=2, each appears exactly 2 times
     result = solution.majorityElement(nums)
     assert result == [], f"Expected [], got {result}"
-    print("✓ test_exactly_threshold passed")
+    print("[PASS] test_exactly_threshold passed")
 
 
 def test_just_above_threshold():
@@ -97,7 +97,7 @@ def test_just_above_threshold():
     nums = [1, 1, 1, 2, 2, 3]  # n=6, n//3=2, 1 appears 3 times (>2)
     result = solution.majorityElement(nums)
     assert result == [1], f"Expected [1], got {result}"
-    print("✓ test_just_above_threshold passed")
+    print("[PASS] test_just_above_threshold passed")
 
 
 def test_three_elements_equal():
@@ -106,7 +106,7 @@ def test_three_elements_equal():
     nums = [1, 2, 3]
     result = solution.majorityElement(nums)
     assert result == [], f"Expected [], got {result}"
-    print("✓ test_three_elements_equal passed")
+    print("[PASS] test_three_elements_equal passed")
 
 
 def test_duplicates_scattered():
@@ -115,7 +115,7 @@ def test_duplicates_scattered():
     nums = [1, 3, 1, 3, 1, 3, 2, 4, 5]
     result = solution.majorityElement(nums)
     assert result == [], f"Expected [], got {result}"
-    print("✓ test_duplicates_scattered passed")
+    print("[PASS] test_duplicates_scattered passed")
 
 
 def test_long_array():
@@ -124,7 +124,7 @@ def test_long_array():
     nums = [1] * 40 + [2] * 35 + [3] * 25  # n=100, threshold=33
     result = solution.majorityElement(nums)
     assert set(result) == {1, 2}, f"Expected [1, 2], got {result}"
-    print("✓ test_long_array passed")
+    print("[PASS] test_long_array passed")
 
 
 def run_all_tests():
@@ -155,10 +155,10 @@ def run_all_tests():
             test()
             passed += 1
         except AssertionError as e:
-            print(f"✗ {test.__name__} failed: {e}")
+            print(f"[FAIL] {test.__name__} failed: {e}")
             failed += 1
         except Exception as e:
-            print(f"✗ {test.__name__} error: {e}")
+            print(f"[FAIL] {test.__name__} error: {e}")
             failed += 1
     
     print(f"\n{'='*50}")

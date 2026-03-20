@@ -15,7 +15,7 @@ def test_basic_operations():
     trie.insert("app")
     assert trie.search("app") == True, "Should find 'app' after insertion"
     
-    print("✓ Basic operations test passed")
+    print("[PASS] Basic operations test passed")
 
 
 def test_empty_trie():
@@ -25,7 +25,7 @@ def test_empty_trie():
     assert trie.search("test") == False, "Empty trie should not find any word"
     assert trie.startsWith("test") == False, "Empty trie should not find any prefix"
     
-    print("✓ Empty trie test passed")
+    print("[PASS] Empty trie test passed")
 
 
 def test_single_character():
@@ -37,7 +37,7 @@ def test_single_character():
     assert trie.search("ab") == False, "Should not find 'ab'"
     assert trie.startsWith("a") == True, "Should find 'a' as prefix"
     
-    print("✓ Single character test passed")
+    print("[PASS] Single character test passed")
 
 
 def test_overlapping_words():
@@ -61,7 +61,7 @@ def test_overlapping_words():
     assert trie.search("cards") == False, "Should not find 'cards'"
     assert trie.search("ca") == False, "Should not find 'ca' as complete word"
     
-    print("✓ Overlapping words test passed")
+    print("[PASS] Overlapping words test passed")
 
 
 def test_prefix_vs_word():
@@ -79,7 +79,7 @@ def test_prefix_vs_word():
     assert trie.search("hell") == True, "Should find 'hell' as complete word"
     assert trie.search("hello") == True, "Should still find 'hello'"
     
-    print("✓ Prefix vs word test passed")
+    print("[PASS] Prefix vs word test passed")
 
 
 def test_duplicate_insertions():
@@ -92,7 +92,7 @@ def test_duplicate_insertions():
     
     assert trie.search("test") == True, "Should find 'test' after multiple insertions"
     
-    print("✓ Duplicate insertions test passed")
+    print("[PASS] Duplicate insertions test passed")
 
 
 def test_long_words():
@@ -106,7 +106,7 @@ def test_long_words():
     assert trie.startsWith("abcdef") == True, "Should find prefix of long word"
     assert trie.search("abcdef") == False, "Should not find partial word"
     
-    print("✓ Long words test passed")
+    print("[PASS] Long words test passed")
 
 
 def test_similar_words():
@@ -122,7 +122,7 @@ def test_similar_words():
     assert trie.search("rat") == True, "Should find 'rat'"
     assert trie.search("hat") == False, "Should not find 'hat'"
     
-    print("✓ Similar words test passed")
+    print("[PASS] Similar words test passed")
 
 
 def test_example_from_problem():
@@ -136,7 +136,7 @@ def test_example_from_problem():
     trie.insert("app")
     assert trie.search("app") == True, "Expected True"
     
-    print("✓ Problem example test passed")
+    print("[PASS] Problem example test passed")
 
 
 def test_chain_of_words():
@@ -154,7 +154,7 @@ def test_chain_of_words():
     assert trie.search("abcdef") == False, "Should not find 'abcdef'"
     assert trie.startsWith("abcdef") == False, "Should not find 'abcdef' as prefix"
     
-    print("✓ Chain of words test passed")
+    print("[PASS] Chain of words test passed")
 
 
 def test_no_common_prefix():
@@ -170,7 +170,7 @@ def test_no_common_prefix():
     
     assert trie.search("apricot") == False, "Should not find 'apricot'"
     
-    print("✓ No common prefix test passed")
+    print("[PASS] No common prefix test passed")
 
 
 def run_all_tests():
@@ -190,7 +190,7 @@ def run_all_tests():
     test_no_common_prefix()
     
     print("\n" + "="*50)
-    print("All tests passed! ✓")
+    print("All tests passed! [PASS]")
     print("="*50)
 
 

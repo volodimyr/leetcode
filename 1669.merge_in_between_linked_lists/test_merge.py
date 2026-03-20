@@ -31,7 +31,7 @@ def test_example_1():
     result = sol.mergeInBetween(list1, 3, 4, list2)
     expected = [10, 1, 13, 1000000, 1000001, 1000002, 5]
     assert linked_list_to_array(result) == expected, f"Expected {expected}, got {linked_list_to_array(result)}"
-    print("✓ Test 1 passed: Example 1")
+    print("[PASS] Test 1 passed: Example 1")
 
 def test_example_2():
     """Example 2: Remove larger range"""
@@ -41,7 +41,7 @@ def test_example_2():
     result = sol.mergeInBetween(list1, 2, 5, list2)
     expected = [0, 1, 1000000, 1000001, 1000002, 1000003, 1000004, 6]
     assert linked_list_to_array(result) == expected, f"Expected {expected}, got {linked_list_to_array(result)}"
-    print("✓ Test 2 passed: Example 2")
+    print("[PASS] Test 2 passed: Example 2")
 
 def test_remove_single_node():
     """Remove a single node (a == b)"""
@@ -51,7 +51,7 @@ def test_remove_single_node():
     result = sol.mergeInBetween(list1, 2, 2, list2)
     expected = [1, 2, 10, 20, 4, 5]
     assert linked_list_to_array(result) == expected, f"Expected {expected}, got {linked_list_to_array(result)}"
-    print("✓ Test 3 passed: Remove single node")
+    print("[PASS] Test 3 passed: Remove single node")
 
 def test_remove_at_start():
     """Remove nodes starting from index 1"""
@@ -61,7 +61,7 @@ def test_remove_at_start():
     result = sol.mergeInBetween(list1, 1, 2, list2)
     expected = [1, 100, 200, 4, 5]
     assert linked_list_to_array(result) == expected, f"Expected {expected}, got {linked_list_to_array(result)}"
-    print("✓ Test 4 passed: Remove at start")
+    print("[PASS] Test 4 passed: Remove at start")
 
 def test_remove_till_end():
     """Remove nodes till near the end"""
@@ -71,7 +71,7 @@ def test_remove_till_end():
     result = sol.mergeInBetween(list1, 2, 4, list2)
     expected = [1, 2, 100, 6]
     assert linked_list_to_array(result) == expected, f"Expected {expected}, got {linked_list_to_array(result)}"
-    print("✓ Test 5 passed: Remove till near end")
+    print("[PASS] Test 5 passed: Remove till near end")
 
 def test_single_node_list2():
     """list2 has only one node"""
@@ -81,7 +81,7 @@ def test_single_node_list2():
     result = sol.mergeInBetween(list1, 1, 3, list2)
     expected = [1, 99, 5]
     assert linked_list_to_array(result) == expected, f"Expected {expected}, got {linked_list_to_array(result)}"
-    print("✓ Test 6 passed: Single node list2")
+    print("[PASS] Test 6 passed: Single node list2")
 
 def test_long_list2():
     """list2 is longer than the removed section"""
@@ -91,7 +91,7 @@ def test_long_list2():
     result = sol.mergeInBetween(list1, 1, 1, list2)
     expected = [1, 10, 20, 30, 40, 50, 3, 4]
     assert linked_list_to_array(result) == expected, f"Expected {expected}, got {linked_list_to_array(result)}"
-    print("✓ Test 7 passed: Long list2")
+    print("[PASS] Test 7 passed: Long list2")
 
 def test_minimum_list1():
     """Minimum size list1 (3 nodes)"""
@@ -101,7 +101,7 @@ def test_minimum_list1():
     result = sol.mergeInBetween(list1, 1, 1, list2)
     expected = [1, 100, 3]
     assert linked_list_to_array(result) == expected, f"Expected {expected}, got {linked_list_to_array(result)}"
-    print("✓ Test 8 passed: Minimum list1")
+    print("[PASS] Test 8 passed: Minimum list1")
 
 def test_large_values():
     """Test with large values"""
@@ -111,7 +111,7 @@ def test_large_values():
     result = sol.mergeInBetween(list1, 2, 3, list2)
     expected = [0, 1, 1000000, 9999999, 4]
     assert linked_list_to_array(result) == expected, f"Expected {expected}, got {linked_list_to_array(result)}"
-    print("✓ Test 9 passed: Large values")
+    print("[PASS] Test 9 passed: Large values")
 
 def test_consecutive_range():
     """Remove consecutive nodes in middle"""
@@ -121,7 +121,7 @@ def test_consecutive_range():
     result = sol.mergeInBetween(list1, 2, 3, list2)
     expected = [5, 10, 100, 200, 300, 25, 30]
     assert linked_list_to_array(result) == expected, f"Expected {expected}, got {linked_list_to_array(result)}"
-    print("✓ Test 10 passed: Consecutive range")
+    print("[PASS] Test 10 passed: Consecutive range")
 
 # Run all tests
 if __name__ == "__main__":
@@ -136,4 +136,4 @@ if __name__ == "__main__":
     test_minimum_list1()
     test_large_values()
     test_consecutive_range()
-    print("\n✅ All tests passed!")
+    print("\n[PASS] All tests passed!")

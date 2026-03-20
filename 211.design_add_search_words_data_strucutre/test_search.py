@@ -13,7 +13,7 @@ def test_example_from_problem():
     assert wd.search(".ad") == True, "Should match '.ad' with 'bad', 'dad', 'mad'"
     assert wd.search("b..") == True, "Should match 'b..' with 'bad'"
     
-    print("✓ Problem example test passed")
+    print("[PASS] Problem example test passed")
 
 
 def test_empty_dictionary():
@@ -24,7 +24,7 @@ def test_empty_dictionary():
     assert wd.search(".") == False, "Empty dictionary should not match single dot"
     assert wd.search("...") == False, "Empty dictionary should not match dots"
     
-    print("✓ Empty dictionary test passed")
+    print("[PASS] Empty dictionary test passed")
 
 
 def test_exact_match():
@@ -39,7 +39,7 @@ def test_exact_match():
     assert wd.search("hell") == False, "Should not find 'hell'"
     assert wd.search("worlds") == False, "Should not find 'worlds'"
     
-    print("✓ Exact match test passed")
+    print("[PASS] Exact match test passed")
 
 
 def test_single_wildcard():
@@ -55,7 +55,7 @@ def test_single_wildcard():
     assert wd.search("ca.") == True, "Should match 'ca.'"
     assert wd.search(".a.") == True, "Should match '.a.'"
     
-    print("✓ Single wildcard test passed")
+    print("[PASS] Single wildcard test passed")
 
 
 def test_multiple_wildcards():
@@ -71,7 +71,7 @@ def test_multiple_wildcards():
     assert wd.search("..c") == True, "Should match '..c' with 'abc'"
     assert wd.search("..d") == False, "Should not match '..d'"
     
-    print("✓ Multiple wildcards test passed")
+    print("[PASS] Multiple wildcards test passed")
 
 
 def test_all_wildcards():
@@ -84,7 +84,7 @@ def test_all_wildcards():
     assert wd.search(".....") == False, "Should not match '.....' (length mismatch)"
     assert wd.search("...") == False, "Should not match '...' (length mismatch)"
     
-    print("✓ All wildcards test passed")
+    print("[PASS] All wildcards test passed")
 
 
 def test_single_character():
@@ -99,7 +99,7 @@ def test_single_character():
     assert wd.search(".") == True, "Should match '.' with 'a' or 'b'"
     assert wd.search("c") == False, "Should not find 'c'"
     
-    print("✓ Single character test passed")
+    print("[PASS] Single character test passed")
 
 
 def test_overlapping_words():
@@ -117,7 +117,7 @@ def test_overlapping_words():
     assert wd.search("car..") == False, "Should not match 'car..' (length mismatch with card/care)"
     assert wd.search("car....") == True, "Should match 'car....' with 'careful'"
     
-    print("✓ Overlapping words test passed")
+    print("[PASS] Overlapping words test passed")
 
 
 def test_wildcard_beginning():
@@ -131,7 +131,7 @@ def test_wildcard_beginning():
     assert wd.search(".pply") == True, "Should match '.pply' with 'apply'"
     assert wd.search(".pp..") == True, "Should match '.pp..' with both words"
     
-    print("✓ Wildcard beginning test passed")
+    print("[PASS] Wildcard beginning test passed")
 
 
 def test_wildcard_end():
@@ -145,7 +145,7 @@ def test_wildcard_end():
     assert wd.search("tex.") == True, "Should match 'tex.' with 'text'"
     assert wd.search("te..") == True, "Should match 'te..' with both words"
     
-    print("✓ Wildcard end test passed")
+    print("[PASS] Wildcard end test passed")
 
 
 def test_no_match():
@@ -160,7 +160,7 @@ def test_no_match():
     assert wd.search(".ello") == True, "Should match '.ello' with 'hello'"
     assert wd.search(".ellx") == False, "Should not match '.ellx'"
     
-    print("✓ No match test passed")
+    print("[PASS] No match test passed")
 
 
 def test_duplicate_words():
@@ -174,7 +174,7 @@ def test_duplicate_words():
     assert wd.search("test") == True, "Should find 'test' after multiple additions"
     assert wd.search("....") == True, "Should match '....' with 'test'"
     
-    print("✓ Duplicate words test passed")
+    print("[PASS] Duplicate words test passed")
 
 
 def test_long_words():
@@ -189,7 +189,7 @@ def test_long_words():
     assert wd.search(".bcdefghij") == True, "Should match with wildcard at beginning"
     assert wd.search("abcd.fghij") == True, "Should match with wildcard in middle"
     
-    print("✓ Long words test passed")
+    print("[PASS] Long words test passed")
 
 
 def test_wildcard_no_alternatives():
@@ -203,7 +203,7 @@ def test_wildcard_no_alternatives():
     assert wd.search("aa.") == True, "Should match 'aa.' with 'aaa'"
     assert wd.search("...") == True, "Should match '...' with 'aaa'"
     
-    print("✓ Wildcard no alternatives test passed")
+    print("[PASS] Wildcard no alternatives test passed")
 
 
 def test_different_lengths():
@@ -221,7 +221,7 @@ def test_different_lengths():
     assert wd.search("....") == True, "Should match '....' with 'abcd'"
     assert wd.search(".....") == False, "Should not match '.....' (no word that long)"
     
-    print("✓ Different lengths test passed")
+    print("[PASS] Different lengths test passed")
 
 
 def test_complex_patterns():
@@ -241,7 +241,7 @@ def test_complex_patterns():
     assert wd.search("a.") == True, "Should match 'a.' with 'at' or 'an'"
     assert wd.search(".") == False, "Should not match '.' (no single char words except none exist)"
     
-    print("✓ Complex patterns test passed")
+    print("[PASS] Complex patterns test passed")
 
 
 def run_all_tests():
@@ -266,7 +266,7 @@ def run_all_tests():
     test_complex_patterns()
     
     print("\n" + "="*50)
-    print("All tests passed! ✓")
+    print("All tests passed! [PASS]")
     print("="*50)
 
 

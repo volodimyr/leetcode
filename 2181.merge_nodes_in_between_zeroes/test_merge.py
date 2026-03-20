@@ -95,6 +95,6 @@ if __name__ == '__main__':
         print("Test 3 Passed: Single Group")
         tester.test_multiple_groups()
         print("Test 4 Passed: Multiple Groups")
-        print("\nAll tests passed successfully! 🎉")
+        print("\nAll tests passed successfully! [OK]")
     except AssertionError as e:
         print(f"\nTest Failed: {e}")
