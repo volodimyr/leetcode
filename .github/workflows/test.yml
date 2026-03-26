@@ -29,6 +29,9 @@ jobs:
         with:
           python-version: '3.14.1'
           
+      - name: Install Python dependencies
+        run: pip install sortedcontainers
+
       - name: Run Python script-based tests
         shell: bash
         run: |
