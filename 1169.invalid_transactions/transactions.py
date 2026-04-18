@@ -60,7 +60,7 @@ class Solution:
                 res.append(t)
                 added.add(tnum)
 
-            for name1, time1, amount1, city1, tnum1, t1 in q:
+            for name1, _, city1, tnum1, t1 in q:
                 if name1 == name and city1 != city:
                     if tnum not in added:
                         res.append(t)
@@ -69,6 +69,6 @@ class Solution:
                         res.append(t1)
                         added.add(tnum1)
 
-            q.append((name, time, amount, city, tnum, t))
+            q.append((name, time, city, tnum, t))
 
         return res
